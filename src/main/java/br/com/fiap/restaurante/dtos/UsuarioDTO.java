@@ -2,25 +2,36 @@ package br.com.fiap.restaurante.dtos;
 
 import br.com.fiap.restaurante.enums.TipoUsuarioEnum;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-
-import java.util.Date;
+import lombok.*;
 
 import static com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY;
+import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY;
 
-public record UsuarioDTO(
-        @JsonProperty(value = "id", access = READ_ONLY)
-        Long id,
-        @JsonProperty("nome")
-        String nome,
-        @JsonProperty("email")
-        String email,
-        @JsonProperty("login")
-        String login,
-        @JsonProperty("endereco")
-        String endereco,
-        @JsonProperty("tipo_usuario")
-        TipoUsuarioEnum tipoUsuario) {
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class UsuarioDTO {
 
+    @JsonProperty(value = "id", access = READ_ONLY)
+    private Long id;
+
+    @JsonProperty("nome")
+    private String nome;
+
+    @JsonProperty("email")
+    private String email;
+
+    @JsonProperty("login")
+    private String login;
+
+    @JsonProperty(value = "senha", access = WRITE_ONLY)
+    private String senha;
+
+    @JsonProperty("endereco")
+    private EnderecoDTO endereco;
+
+    @JsonProperty("tipo_usuario")
+    private TipoUsuarioEnum tipoUsuario;
 }

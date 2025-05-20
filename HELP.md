@@ -1,3 +1,5 @@
+udo docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -e MYSQL_DATABASE=restaurante -e MYSQL_PASSWORD='!@#$1234qW' -e MYSQL_USER=restaurante_user mysql:9.3.0
+
 # Read Me First
 The following was discovered as part of building this project:
 
