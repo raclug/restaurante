@@ -1,5 +1,7 @@
 package br.com.fiap.restaurante.controllers;
 
+import br.com.fiap.restaurante.dtos.LoginDTO;
+import br.com.fiap.restaurante.dtos.SenhaDTO;
 import br.com.fiap.restaurante.dtos.UsuarioDTO;
 import br.com.fiap.restaurante.services.UsuarioService;
 import lombok.AllArgsConstructor;
@@ -23,8 +25,12 @@ public class UsuarioController {
 
     @PutMapping("/{id}")
     public UsuarioDTO alterarUsuario(@RequestBody final UsuarioDTO usuarioDTO, @PathVariable final Long id) {
-        usuarioDTO.setId(id);
-        return usuarioService.alterarUsuario(usuarioDTO);
+        return usuarioService.alterarUsuario(id, usuarioDTO);
+    }
+
+    @PutMapping("/{id}/senhas")
+    public void alterarSenha(@RequestBody final SenhaDTO senhaDTO, @PathVariable final Long id) {
+        usuarioService.alterarSenha(id, senhaDTO);
     }
 
     @GetMapping
@@ -40,5 +46,10 @@ public class UsuarioController {
     @DeleteMapping("/{id}")
     public void removerUsuario(@PathVariable final Long id) {
         usuarioService.removerUsuario(id);
+    }
+
+    @PostMapping("/login")
+    public void validarLogin(@RequestBody final LoginDTO loginDTO) {
+        usuarioService.validarLogin(loginDTO);
     }
 }

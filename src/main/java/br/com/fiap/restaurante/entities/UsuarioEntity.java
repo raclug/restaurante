@@ -24,6 +24,7 @@ public class UsuarioEntity {
 
     private String email;
 
+    @Column(unique = true)
     private String login;
 
     @OneToOne(cascade = CascadeType.ALL)

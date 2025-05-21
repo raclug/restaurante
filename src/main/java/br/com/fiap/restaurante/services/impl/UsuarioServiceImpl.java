@@ -1,9 +1,14 @@
 package br.com.fiap.restaurante.services.impl;
 
+import br.com.fiap.restaurante.dtos.LoginDTO;
+import br.com.fiap.restaurante.dtos.SenhaDTO;
 import br.com.fiap.restaurante.dtos.UsuarioDTO;
 import br.com.fiap.restaurante.entities.SenhaEntity;
 import br.com.fiap.restaurante.entities.UsuarioEntity;
+import br.com.fiap.restaurante.exceptions.UsuarioNaoAutorizadoException;
+import br.com.fiap.restaurante.exceptions.UsuarioNaoEncontradoException;
 import br.com.fiap.restaurante.mappers.UsuarioMapper;
+import br.com.fiap.restaurante.repositories.SenhaRepository;
 import br.com.fiap.restaurante.repositories.UsuarioRepository;
 import br.com.fiap.restaurante.services.UsuarioService;
 import lombok.AllArgsConstructor;
@@ -20,6 +25,8 @@ import static br.com.fiap.restaurante.mappers.UsuarioMapper.mapToUsuarioDTO;
 public class UsuarioServiceImpl implements UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
+
+    private final SenhaRepository senhaRepository;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -45,9 +52,9 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public UsuarioDTO alterarUsuario(final UsuarioDTO usuarioDTO) {
+    public UsuarioDTO alterarUsuario(final Long id, final UsuarioDTO usuarioDTO) {
 
-        var usuarioEntity = usuarioRepository.findById(usuarioDTO.getId()).orElseThrow(IllegalArgumentException::new);
+        var usuarioEntity = consultarUsuarioEntity(id);
 
         var enderecoEntity = mapToEnderecoEntity(usuarioDTO.getEndereco());
 
@@ -63,9 +70,22 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
+    public void alterarSenha(final Long id, final SenhaDTO senhaDTO) {
+
+        var usuarioEntity = consultarUsuarioEntity(id);
+
+        var senhaEntity = usuarioEntity.getSenha();
+
+        senhaEntity.setSenha(passwordEncoder.encode(senhaDTO.getSenha()));
+
+        senhaRepository.save(senhaEntity);
+    }
+
+
+    @Override
     public void removerUsuario(final Long id) {
 
-        var usuarioEntity = usuarioRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        var usuarioEntity = consultarUsuarioEntity(id);
 
         usuarioRepository.delete(usuarioEntity);
     }
@@ -81,8 +101,28 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public UsuarioDTO consultarUsuario(Long id) {
 
-        var usuarioEntity = usuarioRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        var usuarioEntity = consultarUsuarioEntity(id);
 
         return mapToUsuarioDTO(usuarioEntity);
+    }
+
+    @Override
+    public void validarLogin(final LoginDTO loginDTO) {
+
+        var usuarioEntity = usuarioRepository.findFirstByLogin(loginDTO.getLogin()).orElseThrow(() ->
+                new UsuarioNaoAutorizadoException("Login ou senha inválidos")
+        );
+
+        var senhaCriptografada = usuarioEntity.getSenha().getSenha();
+
+        if (!passwordEncoder.matches(loginDTO.getSenha(), senhaCriptografada)) {
+            throw new UsuarioNaoAutorizadoException("Login ou senha inválidos");
+        }
+    }
+
+    private UsuarioEntity consultarUsuarioEntity(Long id) {
+        return usuarioRepository.findById(id).orElseThrow(
+                () -> new UsuarioNaoEncontradoException("Usuário não encontrado")
+        );
     }
 }
