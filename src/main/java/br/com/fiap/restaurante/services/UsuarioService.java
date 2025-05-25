@@ -1,8 +1,8 @@
 package br.com.fiap.restaurante.services;
 
-import br.com.fiap.restaurante.dtos.LoginDTO;
-import br.com.fiap.restaurante.dtos.SenhaDTO;
+import br.com.fiap.restaurante.dtos.AlteracaoUsuarioDTO;
 import br.com.fiap.restaurante.dtos.UsuarioDTO;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -10,15 +10,11 @@ public interface UsuarioService {
 
     UsuarioDTO criarUsuario(final UsuarioDTO usuarioDTO);
 
-    UsuarioDTO alterarUsuario(final Long id, final UsuarioDTO usuarioDTO);
-
-    void alterarSenha(final Long id, final SenhaDTO senhaDTO);
+    UsuarioDTO alterarUsuario(final Long id, final AlteracaoUsuarioDTO usuarioDTO);
 
     void removerUsuario(final Long id);
 
-    List<UsuarioDTO> listarUsuarios();
+    List<UsuarioDTO> listarUsuarios(final Pageable pagina);
 
     UsuarioDTO consultarUsuario(final Long id);
-
-    void validarLogin(final LoginDTO loginDTO);
 }

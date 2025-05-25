@@ -2,13 +2,16 @@ package br.com.fiap.restaurante.mappers;
 
 import br.com.fiap.restaurante.dtos.EnderecoDTO;
 import br.com.fiap.restaurante.entities.EnderecoEntity;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
+
+@Component
+@AllArgsConstructor
 public class EnderecoMapper {
 
-    private EnderecoMapper() {
-    }
 
-    public static EnderecoDTO mapToEnderecoDTO(final EnderecoEntity enderecoEntity) {
+    public EnderecoDTO mapToEnderecoDTO(final EnderecoEntity enderecoEntity) {
         return EnderecoDTO.builder()
                 .cep(enderecoEntity.getCep())
                 .logradouro(enderecoEntity.getLogradouro())
@@ -20,7 +23,7 @@ public class EnderecoMapper {
                 .build();
     }
 
-    public static EnderecoEntity mapToEnderecoEntity(final EnderecoDTO enderecoDTO) {
+    public EnderecoEntity mapToEnderecoEntity(final EnderecoDTO enderecoDTO) {
 
         return EnderecoEntity.builder()
                 .cep(enderecoDTO.getCep())

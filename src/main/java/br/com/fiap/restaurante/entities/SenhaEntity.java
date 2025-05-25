@@ -24,4 +24,7 @@ public class SenhaEntity {
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime ultimaAlteracao;
+
+    @OneToOne(mappedBy = "senha", cascade = CascadeType.ALL)
+    private UsuarioEntity usuario;
 }

@@ -1,5 +1,6 @@
 package br.com.fiap.restaurante.entities;
 
+import br.com.fiap.restaurante.enums.UfEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,6 +21,7 @@ public class EnderecoEntity {
     private String complemento;
     private String bairro;
     private String cidade;
-    private String estado;
+    @Enumerated(EnumType.STRING)
+    private UfEnum estado;
     private String cep;
 }

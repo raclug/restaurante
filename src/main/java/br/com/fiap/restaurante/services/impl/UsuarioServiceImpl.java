@@ -1,24 +1,18 @@
 package br.com.fiap.restaurante.services.impl;
 
-import br.com.fiap.restaurante.dtos.LoginDTO;
-import br.com.fiap.restaurante.dtos.SenhaDTO;
+import br.com.fiap.restaurante.dtos.AlteracaoUsuarioDTO;
 import br.com.fiap.restaurante.dtos.UsuarioDTO;
-import br.com.fiap.restaurante.entities.SenhaEntity;
 import br.com.fiap.restaurante.entities.UsuarioEntity;
-import br.com.fiap.restaurante.exceptions.UsuarioNaoAutorizadoException;
+import br.com.fiap.restaurante.exceptions.LoginJaExistenteException;
 import br.com.fiap.restaurante.exceptions.UsuarioNaoEncontradoException;
 import br.com.fiap.restaurante.mappers.UsuarioMapper;
-import br.com.fiap.restaurante.repositories.SenhaRepository;
 import br.com.fiap.restaurante.repositories.UsuarioRepository;
 import br.com.fiap.restaurante.services.UsuarioService;
 import lombok.AllArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-import static br.com.fiap.restaurante.mappers.EnderecoMapper.mapToEnderecoEntity;
-import static br.com.fiap.restaurante.mappers.UsuarioMapper.mapToUsuarioDTO;
 
 @Service
 @AllArgsConstructor
@@ -26,61 +20,35 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
 
-    private final SenhaRepository senhaRepository;
-
-    private final PasswordEncoder passwordEncoder;
+    private final UsuarioMapper usuarioMapper;
 
     @Override
     public UsuarioDTO criarUsuario(final UsuarioDTO usuarioDTO) {
 
-        var enderecoEntity = mapToEnderecoEntity(usuarioDTO.getEndereco());
+        var loginExistente = usuarioRepository.findFirstByLogin(usuarioDTO.getLogin()).isPresent();
 
-        var senhaEntity = SenhaEntity.builder().senha(passwordEncoder.encode(usuarioDTO.getSenha())).build();
+        if (loginExistente) {
+            throw new LoginJaExistenteException("Login já está sendo utilizado.");
+        }
 
-        var usuarioEntity = UsuarioEntity.builder()
-                .nome(usuarioDTO.getNome())
-                .endereco(enderecoEntity)
-                .tipoUsuario(usuarioDTO.getTipoUsuario())
-                .email(usuarioDTO.getEmail())
-                .senha(senhaEntity)
-                .login(usuarioDTO.getLogin())
-                .build();
+        var usuarioEntity = usuarioMapper.mapToUsuarioEntity(usuarioDTO);
 
         usuarioEntity = usuarioRepository.save(usuarioEntity);
 
-        return mapToUsuarioDTO(usuarioEntity);
+        return usuarioMapper.mapToUsuarioDTO(usuarioEntity);
     }
 
     @Override
-    public UsuarioDTO alterarUsuario(final Long id, final UsuarioDTO usuarioDTO) {
+    public UsuarioDTO alterarUsuario(final Long id, final AlteracaoUsuarioDTO usuarioDTO) {
 
         var usuarioEntity = consultarUsuarioEntity(id);
 
-        var enderecoEntity = mapToEnderecoEntity(usuarioDTO.getEndereco());
-
-        usuarioEntity.setNome(usuarioDTO.getNome());
-        usuarioEntity.setEndereco(enderecoEntity);
-        usuarioEntity.setTipoUsuario(usuarioDTO.getTipoUsuario());
-        usuarioEntity.setEmail(usuarioDTO.getEmail());
-        usuarioEntity.setLogin(usuarioDTO.getLogin());
+        usuarioMapper.setUsuarioEntityFromUsuarioAlteracao(usuarioEntity, usuarioDTO);
 
         usuarioEntity = usuarioRepository.save(usuarioEntity);
 
-        return mapToUsuarioDTO(usuarioEntity);
+        return usuarioMapper.mapToUsuarioDTO(usuarioEntity);
     }
-
-    @Override
-    public void alterarSenha(final Long id, final SenhaDTO senhaDTO) {
-
-        var usuarioEntity = consultarUsuarioEntity(id);
-
-        var senhaEntity = usuarioEntity.getSenha();
-
-        senhaEntity.setSenha(passwordEncoder.encode(senhaDTO.getSenha()));
-
-        senhaRepository.save(senhaEntity);
-    }
-
 
     @Override
     public void removerUsuario(final Long id) {
@@ -91,11 +59,11 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public List<UsuarioDTO> listarUsuarios() {
+    public List<UsuarioDTO> listarUsuarios(final Pageable pageable) {
 
-        var resultStream = usuarioRepository.findAll().stream();
+        var resultStream = usuarioRepository.findAll(pageable).stream();
 
-        return resultStream.map(UsuarioMapper::mapToUsuarioDTO).toList();
+        return resultStream.map(usuarioMapper::mapToUsuarioDTO).toList();
     }
 
     @Override
@@ -103,21 +71,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         var usuarioEntity = consultarUsuarioEntity(id);
 
-        return mapToUsuarioDTO(usuarioEntity);
-    }
-
-    @Override
-    public void validarLogin(final LoginDTO loginDTO) {
-
-        var usuarioEntity = usuarioRepository.findFirstByLogin(loginDTO.getLogin()).orElseThrow(() ->
-                new UsuarioNaoAutorizadoException("Login ou senha inválidos")
-        );
-
-        var senhaCriptografada = usuarioEntity.getSenha().getSenha();
-
-        if (!passwordEncoder.matches(loginDTO.getSenha(), senhaCriptografada)) {
-            throw new UsuarioNaoAutorizadoException("Login ou senha inválidos");
-        }
+        return usuarioMapper.mapToUsuarioDTO(usuarioEntity);
     }
 
     private UsuarioEntity consultarUsuarioEntity(Long id) {

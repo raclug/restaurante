@@ -1,6 +1,10 @@
 package br.com.fiap.restaurante.dtos;
 
+import br.com.fiap.restaurante.validations.SenhasIguais;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY;
@@ -10,14 +14,22 @@ import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@SenhasIguais
+@Schema(description = "DTO para alteração de senha do usuário")
 public class SenhaDTO {
 
-    @JsonProperty(value = "senha", access = WRITE_ONLY)
+    @NotBlank(message = "A senha é obrigatória.")
+    @JsonProperty(access = WRITE_ONLY)
+    @Schema(description = "Senha atual do usuário", example = "senhaAtual123", accessMode = Schema.AccessMode.WRITE_ONLY)
     private String senha;
 
-    @JsonProperty(value = "confirmacao_senha", access = WRITE_ONLY)
+    @NotBlank(message = "A senha confirmação é obrigatória.")
+    @JsonProperty(access = WRITE_ONLY)
+    @Schema(description = "Confirmação da nova senha", example = "novaSenha123", accessMode = Schema.AccessMode.WRITE_ONLY)
     private String confirmacaoSenha;
 
-    @JsonProperty(value = "nova_senha", access = WRITE_ONLY)
+    @NotBlank(message = "A nova senha é obrigatória.")
+    @JsonProperty(access = WRITE_ONLY)
+    @Schema(description = "Nova senha do usuário", example = "novaSenha123", accessMode = Schema.AccessMode.WRITE_ONLY)
     private String novaSenha;
 }
