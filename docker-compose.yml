@@ -1,0 +1,36 @@
+services:
+  mysql-db:
+    image: mysql:8.3
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    networks:
+      - restaurante-net
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u${MYSQL_USER}", "-p${MYSQL_PASSWORD}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  restaurante-app:
+    image: restaurante
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+    environment:
+      URL_DATABASE: jdbc:mysql://mysql-db:3306/${MYSQL_DATABASE}
+      USER_DATABASE: ${APP_DB_USER}
+      PASS_DATABASE: ${APP_DB_PASS}
+    ports:
+      - "8080:8080"
+    networks:
+      - restaurante-net
+
+networks:
+  restaurante-net:
+    driver: bridge
