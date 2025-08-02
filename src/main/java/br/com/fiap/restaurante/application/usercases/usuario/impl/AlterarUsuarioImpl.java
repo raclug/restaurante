@@ -1,6 +1,6 @@
 package br.com.fiap.restaurante.application.usercases.usuario.impl;
 
-import br.com.fiap.restaurante.application.gateways.UsuarioGateway;
+import br.com.fiap.restaurante.application.ports.UsuarioPort;
 import br.com.fiap.restaurante.application.usercases.usuario.AlterarUsuario;
 import br.com.fiap.restaurante.domain.entities.Usuario;
 import br.com.fiap.restaurante.exceptions.UsuarioNaoEncontradoException;
@@ -9,12 +9,12 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class AlterarUsuarioImpl implements AlterarUsuario {
 
-    private final UsuarioGateway usuarioGateway;
+    private final UsuarioPort usuarioPort;
 
     @Override
     public Usuario alterarUsuario(final Usuario usuario) {
 
-        var usuarioConsulta = usuarioGateway.consultarUsuarioPorId(usuario.id());
+        var usuarioConsulta = usuarioPort.consultarUsuarioPorId(usuario.id());
 
         if (usuarioConsulta.isEmpty()) {
             throw new UsuarioNaoEncontradoException("Usuário não encontrado.");
@@ -29,6 +29,6 @@ public class AlterarUsuarioImpl implements AlterarUsuario {
                 usuario.tipoUsuario(),
                 usuario.endereco());
 
-        return usuarioGateway.salvarUsuario(usuarioParaAlteracao);
+        return usuarioPort.salvarUsuario(usuarioParaAlteracao);
     }
 }

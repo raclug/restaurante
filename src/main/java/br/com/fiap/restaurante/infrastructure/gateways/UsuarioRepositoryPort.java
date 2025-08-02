@@ -1,6 +1,6 @@
 package br.com.fiap.restaurante.infrastructure.gateways;
 
-import br.com.fiap.restaurante.application.gateways.UsuarioGateway;
+import br.com.fiap.restaurante.application.ports.UsuarioPort;
 import br.com.fiap.restaurante.domain.entities.Usuario;
 import br.com.fiap.restaurante.infrastructure.mappers.UsuarioEntityMapper;
 import br.com.fiap.restaurante.infrastructure.persistence.entities.UsuarioEntity;
@@ -15,7 +15,7 @@ import static br.com.fiap.restaurante.infrastructure.mappers.UsuarioEntityMapper
 import static br.com.fiap.restaurante.infrastructure.mappers.UsuarioEntityMapper.toEntity;
 
 @AllArgsConstructor
-public class UsuarioRepositoryGateway implements UsuarioGateway {
+public class UsuarioRepositoryPort implements UsuarioPort {
 
     private final UsuarioRepository usuarioRepository;
 

@@ -3,7 +3,7 @@ package br.com.fiap.restaurante.infrastructure.mappers;
 import br.com.fiap.restaurante.domain.entities.Endereco;
 import br.com.fiap.restaurante.infrastructure.persistence.entities.EnderecoEntity;
 
-public class EnderecoMapper {
+public class EnderecoEntityMapper {
 
     public static EnderecoEntity toEntity(final Endereco endereco) {
 

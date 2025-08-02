@@ -9,7 +9,7 @@ public class UsuarioEntityMapper {
 
         final var senhaEntity = SenhaEntityMapper.toEntity(usuario.senha());
 
-        final var enderecoEntity = EnderecoMapper.toEntity(usuario.endereco());
+        final var enderecoEntity = EnderecoEntityMapper.toEntity(usuario.endereco());
 
         return UsuarioEntity.builder()
                 .id(usuario.id())
@@ -26,7 +26,7 @@ public class UsuarioEntityMapper {
 
         final var senha = usuarioEntity.getSenha().getSenha();
 
-        final var endereco = EnderecoMapper.toDomain(usuarioEntity.getEndereco());
+        final var endereco = EnderecoEntityMapper.toDomain(usuarioEntity.getEndereco());
 
         return new Usuario(
                 usuarioEntity.getId(),

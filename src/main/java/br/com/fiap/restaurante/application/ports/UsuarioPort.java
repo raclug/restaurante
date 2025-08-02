@@ -1,11 +1,11 @@
-package br.com.fiap.restaurante.application.gateways;
+package br.com.fiap.restaurante.application.ports;
 
 import br.com.fiap.restaurante.domain.entities.Usuario;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface UsuarioGateway {
+public interface UsuarioPort {
 
     Usuario salvarUsuario(Usuario usuario);
 
