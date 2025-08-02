@@ -2,6 +2,7 @@ package br.com.fiap.restaurante.application.usercases.usuario.impl;
 
 import br.com.fiap.restaurante.application.ports.UsuarioPort;
 import br.com.fiap.restaurante.application.usercases.usuario.AlterarUsuario;
+import br.com.fiap.restaurante.domain.entities.Endereco;
 import br.com.fiap.restaurante.domain.entities.Usuario;
 import br.com.fiap.restaurante.domain.exceptions.UsuarioNaoEncontradoException;
 import lombok.AllArgsConstructor;
@@ -20,14 +21,25 @@ public class AlterarUsuarioImpl implements AlterarUsuario {
             throw new UsuarioNaoEncontradoException("Usuário não encontrado.");
         }
 
+        var enderecoParaAlteracao = new Endereco(
+                usuarioConsulta.get().getEndereco().id(),
+                usuario.getEndereco().logradouro(),
+                usuario.getEndereco().numero(),
+                usuario.getEndereco().complemento(),
+                usuario.getEndereco().bairro(),
+                usuario.getEndereco().cidade(),
+                usuario.getEndereco().estado(),
+                usuario.getEndereco().cep()
+        );
+
         var usuarioParaAlteracao = new Usuario(
                 id,
-                usuario.nome(),
-                usuario.email(),
-                usuarioConsulta.get().login(),
-                null,
-                usuario.tipoUsuario(),
-                usuario.endereco());
+                usuario.getNome(),
+                usuario.getEmail(),
+                usuarioConsulta.get().getLogin(),
+                usuarioConsulta.get().getSenha(),
+                usuario.getTipoUsuario(),
+                enderecoParaAlteracao);
 
         return usuarioPort.salvarUsuario(usuarioParaAlteracao);
     }

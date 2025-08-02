@@ -9,8 +9,8 @@ public class LoginDTOMapper {
 
     public static Login toDomain(final LoginDTO loginDTO) {
         return new Login(
-                loginDTO.getLogin(),
-                loginDTO.getSenha()
+                loginDTO.getSenha(),
+                loginDTO.getLogin()
         );
     }
 }

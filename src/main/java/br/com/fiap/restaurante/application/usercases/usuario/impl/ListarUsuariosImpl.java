@@ -13,8 +13,7 @@ public class ListarUsuariosImpl implements ListarUsuarios {
     private final UsuarioPort usuarioPort;
 
     @Override
-    public List<Usuario> execute(final Integer pagina,
-                                        final Integer tamanhoPagina) {
+    public List<Usuario> execute(final Integer pagina, final Integer tamanhoPagina) {
 
         return usuarioPort.listarUsuarios(pagina, tamanhoPagina);
     }

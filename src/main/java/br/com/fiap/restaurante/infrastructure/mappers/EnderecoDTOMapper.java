@@ -10,6 +10,7 @@ public class EnderecoDTOMapper {
 
     public static Endereco toDomain(final EnderecoDTO enderecoDTO) {
         return new Endereco(
+                null,
                 enderecoDTO.getLogradouro(),
                 enderecoDTO.getNumero(),
                 enderecoDTO.getComplemento(),

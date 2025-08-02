@@ -1,14 +1,16 @@
 package br.com.fiap.restaurante.infrastructure.mappers;
 
+import br.com.fiap.restaurante.application.ports.PasswordEncoderPort;
 import br.com.fiap.restaurante.domain.entities.Senha;
 import br.com.fiap.restaurante.infrastructure.persistence.entities.SenhaEntity;
 
 public class SenhaEntityMapper {
 
-    private SenhaEntityMapper(){}
+    private SenhaEntityMapper() {
+    }
 
     public static SenhaEntity toEntity(final Senha senha) {
-        return SenhaEntity.builder().id(senha.id()).senha(senha.senha()).build();
+        return SenhaEntity.builder().id(senha.getId()).senha(senha.getSenha()).build();
     }
 
     public static Senha toDomain(final SenhaEntity senhaEntity) {

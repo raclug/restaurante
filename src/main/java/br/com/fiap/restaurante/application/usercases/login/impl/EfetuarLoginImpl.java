@@ -20,9 +20,9 @@ public class EfetuarLoginImpl implements EfetuarLogin {
                 new NaoAutorizadoException("Login ou senha inválidos")
         );
 
-        var senhaCriptografada = senhaCadastrada.senha();
+        var senhaCriptografada = senhaCadastrada.getSenha();
 
-        if (!passwordEncoderPort.matches(login.senha(), senhaCriptografada)) {
+        if (passwordEncoderPort.matches(login.senha(), senhaCriptografada)) {
             throw new NaoAutorizadoException("Login ou senha inválidos");
         }
     }

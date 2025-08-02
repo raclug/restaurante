@@ -21,11 +21,11 @@ public class SalvarSenhaImpl implements SalvarSenha {
         var senhaCadastrada = senhaPort.consultarSenhaPorUsuarioId(usuarioId)
                 .orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado."));
 
-        if (!passwordEncoderPort.matches(senhaAtual, senhaCadastrada.senha())) {
+        if (passwordEncoderPort.matches(senhaAtual, senhaCadastrada.getSenha())) {
             throw new NaoAutorizadoException("Senha atual inválida");
         }
 
-        var senhaAlterada = new Senha(senhaCadastrada.id(), usuarioId, passwordEncoderPort.encode(novaSenha));
+        var senhaAlterada = new Senha(senhaCadastrada.getId(), usuarioId, passwordEncoderPort.encode(novaSenha));
 
         senhaPort.salvarSenha(senhaAlterada);
     }

@@ -1,5 +1,6 @@
 package br.com.fiap.restaurante.infrastructure.mappers;
 
+import br.com.fiap.restaurante.domain.entities.Senha;
 import br.com.fiap.restaurante.domain.entities.Usuario;
 import br.com.fiap.restaurante.infrastructure.dtos.UsuarioDTO;
 
@@ -12,12 +13,14 @@ public class UsuarioDTOMapper {
 
         var endereco = EnderecoDTOMapper.toDomain(usuarioDTO.getEndereco());
 
+        var senha = new Senha(null, null, usuarioDTO.getSenha());
+
         return new Usuario(
                 usuarioDTO.getId(),
                 usuarioDTO.getNome(),
                 usuarioDTO.getEmail(),
                 usuarioDTO.getLogin(),
-                usuarioDTO.getSenha(),
+                senha,
                 usuarioDTO.getTipoUsuario(),
                 endereco
         );
@@ -25,14 +28,14 @@ public class UsuarioDTOMapper {
 
     public static UsuarioDTO toDTO(final Usuario usuario) {
 
-        var enderecoDTO = EnderecoDTOMapper.toDTO(usuario.endereco());
+        var enderecoDTO = EnderecoDTOMapper.toDTO(usuario.getEndereco());
 
         return UsuarioDTO.builder()
-                .id(usuario.id())
-                .nome(usuario.nome())
-                .email(usuario.email())
-                .login(usuario.login())
-                .tipoUsuario(usuario.tipoUsuario())
+                .id(usuario.getId())
+                .nome(usuario.getNome())
+                .email(usuario.getEmail())
+                .login(usuario.getLogin())
+                .tipoUsuario(usuario.getTipoUsuario())
                 .endereco(enderecoDTO).build();
     }
 }

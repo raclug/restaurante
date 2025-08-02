@@ -3,11 +3,11 @@ package br.com.fiap.restaurante.infrastructure.gateways;
 import br.com.fiap.restaurante.application.ports.UsuarioPort;
 import br.com.fiap.restaurante.domain.entities.Usuario;
 import br.com.fiap.restaurante.infrastructure.mappers.UsuarioEntityMapper;
-import br.com.fiap.restaurante.infrastructure.persistence.entities.UsuarioEntity;
 import br.com.fiap.restaurante.infrastructure.persistence.repositories.UsuarioRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,10 +31,7 @@ public class UsuarioRepositoryGateway implements UsuarioPort {
 
     @Override
     public void removerUsuario(Long id) {
-
-        var usuarioEntity = UsuarioEntity.builder().id(id).build();
-
-        usuarioRepository.delete(usuarioEntity);
+        usuarioRepository.deleteAllById(Collections.singletonList(id));
     }
 
     @Override

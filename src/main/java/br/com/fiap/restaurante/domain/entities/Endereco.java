@@ -1,7 +1,8 @@
 package br.com.fiap.restaurante.domain.entities;
 
 
-public record Endereco(String logradouro,
+public record Endereco(Long id,
+                       String logradouro,
                        String numero,
                        String complemento,
                        String bairro,

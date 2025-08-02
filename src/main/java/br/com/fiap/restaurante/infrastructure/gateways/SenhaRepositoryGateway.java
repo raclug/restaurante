@@ -1,5 +1,6 @@
 package br.com.fiap.restaurante.infrastructure.gateways;
 
+import br.com.fiap.restaurante.application.ports.PasswordEncoderPort;
 import br.com.fiap.restaurante.application.ports.SenhaPort;
 import br.com.fiap.restaurante.domain.entities.Senha;
 import br.com.fiap.restaurante.infrastructure.mappers.SenhaEntityMapper;
@@ -26,7 +27,8 @@ public class SenhaRepositoryGateway implements SenhaPort {
 
     @Override
     public Optional<Senha> consultarSenhaPorLogin(String login) {
-        return Optional.empty();
+        return senhaRepository.findByUsuarioLogin(login)
+                .map(SenhaEntityMapper::toDomain);
     }
 
     @Override

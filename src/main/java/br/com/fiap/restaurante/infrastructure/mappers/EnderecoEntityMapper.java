@@ -10,6 +10,7 @@ public class EnderecoEntityMapper {
     public static EnderecoEntity toEntity(final Endereco endereco) {
 
         return EnderecoEntity.builder()
+                .id(endereco.id())
                 .logradouro(endereco.logradouro())
                 .numero(endereco.numero())
                 .complemento(endereco.complemento())
@@ -23,6 +24,7 @@ public class EnderecoEntityMapper {
     public static Endereco toDomain(final EnderecoEntity enderecoEntity) {
 
         return new Endereco(
+                enderecoEntity.getId(),
                 enderecoEntity.getLogradouro(),
                 enderecoEntity.getNumero(),
                 enderecoEntity.getComplemento(),
