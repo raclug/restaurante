@@ -1,6 +1,7 @@
 package br.com.fiap.restaurante.infrastructure.persistence.entities;
 
-import br.com.fiap.restaurante.enums.UfEnum;
+
+import br.com.fiap.restaurante.domain.entities.UfEnum;
 import jakarta.persistence.*;
 import lombok.*;
 

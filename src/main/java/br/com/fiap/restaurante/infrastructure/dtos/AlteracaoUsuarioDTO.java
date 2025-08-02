@@ -1,6 +1,6 @@
 package br.com.fiap.restaurante.infrastructure.dtos;
 
-import br.com.fiap.restaurante.enums.TipoUsuarioEnum;
+import br.com.fiap.restaurante.domain.entities.TipoUsuarioEnum;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;

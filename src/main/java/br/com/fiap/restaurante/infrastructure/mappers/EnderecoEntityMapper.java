@@ -5,6 +5,8 @@ import br.com.fiap.restaurante.infrastructure.persistence.entities.EnderecoEntit
 
 public class EnderecoEntityMapper {
 
+    private EnderecoEntityMapper(){}
+
     public static EnderecoEntity toEntity(final Endereco endereco) {
 
         return EnderecoEntity.builder()

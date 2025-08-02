@@ -1,4 +1,4 @@
-package br.com.fiap.restaurante.configs;
+package br.com.fiap.restaurante.configurations;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;

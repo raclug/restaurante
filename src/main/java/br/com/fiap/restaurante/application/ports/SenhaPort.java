@@ -8,5 +8,7 @@ public interface SenhaPort {
 
     Optional<Senha> consultarSenhaPorUsuarioId(Long usuarioId);
 
+    Optional<Senha> consultarSenhaPorLogin(String login);
+
     void salvarSenha(Senha senha);
 }

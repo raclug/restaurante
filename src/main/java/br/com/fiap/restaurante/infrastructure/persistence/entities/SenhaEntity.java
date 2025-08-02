@@ -1,6 +1,6 @@
 package br.com.fiap.restaurante.infrastructure.persistence.entities;
 
-import br.com.fiap.restaurante.entities.UsuarioEntity;
+
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UpdateTimestamp;

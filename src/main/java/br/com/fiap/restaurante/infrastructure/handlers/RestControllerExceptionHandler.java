@@ -1,9 +1,10 @@
-package br.com.fiap.restaurante.handlers;
+package br.com.fiap.restaurante.infrastructure.handlers;
 
-import br.com.fiap.restaurante.dtos.MensagemErroDTO;
-import br.com.fiap.restaurante.exceptions.LoginJaExistenteException;
-import br.com.fiap.restaurante.exceptions.NaoAutorizadoException;
-import br.com.fiap.restaurante.exceptions.UsuarioNaoEncontradoException;
+
+import br.com.fiap.restaurante.domain.exceptions.LoginJaExistenteException;
+import br.com.fiap.restaurante.domain.exceptions.NaoAutorizadoException;
+import br.com.fiap.restaurante.domain.exceptions.UsuarioNaoEncontradoException;
+import br.com.fiap.restaurante.infrastructure.dtos.MensagemErroDTO;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class RestControllerExceptionHandler {

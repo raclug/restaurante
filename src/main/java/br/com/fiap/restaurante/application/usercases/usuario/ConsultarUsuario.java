@@ -4,5 +4,5 @@ import br.com.fiap.restaurante.domain.entities.Usuario;
 
 public interface ConsultarUsuario {
 
-    Usuario consultarUsuario(Long id);
+    Usuario execute(Long id);
 }

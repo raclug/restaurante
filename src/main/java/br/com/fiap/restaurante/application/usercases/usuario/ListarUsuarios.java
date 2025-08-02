@@ -6,6 +6,5 @@ import java.util.List;
 
 public interface ListarUsuarios {
 
-    List<Usuario> listarUsuarios(Integer pagina,
-                                 Integer tamanhoPagina);
+    List<Usuario> execute(Integer pagina, Integer tamanhoPagina);
 }

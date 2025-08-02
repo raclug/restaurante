@@ -1,6 +1,6 @@
 package br.com.fiap.restaurante.infrastructure.controllers.interfaces;
 
-import br.com.fiap.restaurante.dtos.LoginDTO;
+import br.com.fiap.restaurante.infrastructure.dtos.LoginDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -20,5 +20,5 @@ public interface ILoginController {
                     @ApiResponse(responseCode = "400", description = "Requisição inválida")
             }
     )
-    void validarLogin(@RequestBody @Validated final LoginDTO loginDTO);
+    void efetuarLogin(@RequestBody @Validated final LoginDTO loginDTO);
 }

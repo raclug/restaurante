@@ -1,4 +1,4 @@
-package br.com.fiap.restaurante.exceptions;
+package br.com.fiap.restaurante.domain.exceptions;
 
 public class UsuarioNaoEncontradoException extends RuntimeException {
 

@@ -4,5 +4,5 @@ import br.com.fiap.restaurante.domain.entities.Usuario;
 
 public interface CriarUsuario {
 
-    Usuario criarUsuario(Usuario usuario);
+    Usuario execute(Usuario usuario);
 }

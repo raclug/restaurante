@@ -1,6 +1,5 @@
 package br.com.fiap.restaurante.infrastructure.persistence.repositories;
-
-import br.com.fiap.restaurante.entities.SenhaEntity;
+import br.com.fiap.restaurante.infrastructure.persistence.entities.SenhaEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,4 +9,6 @@ import java.util.Optional;
 public interface SenhaRepository extends CrudRepository<SenhaEntity, Long> {
 
     Optional<SenhaEntity> findByUsuarioId(Long usuarioId);
+
+    Optional<SenhaEntity> findByUsuarioLogin(String login);
 }

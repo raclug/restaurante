@@ -1,6 +1,6 @@
 package br.com.fiap.restaurante.infrastructure.dtos;
 
-import br.com.fiap.restaurante.enums.UfEnum;
+import br.com.fiap.restaurante.domain.entities.UfEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;

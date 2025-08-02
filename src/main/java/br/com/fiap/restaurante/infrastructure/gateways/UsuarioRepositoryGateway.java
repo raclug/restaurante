@@ -6,6 +6,7 @@ import br.com.fiap.restaurante.infrastructure.mappers.UsuarioEntityMapper;
 import br.com.fiap.restaurante.infrastructure.persistence.entities.UsuarioEntity;
 import br.com.fiap.restaurante.infrastructure.persistence.repositories.UsuarioRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,8 +15,9 @@ import static br.com.fiap.restaurante.infrastructure.mappers.PageableMapper.toPa
 import static br.com.fiap.restaurante.infrastructure.mappers.UsuarioEntityMapper.toDomain;
 import static br.com.fiap.restaurante.infrastructure.mappers.UsuarioEntityMapper.toEntity;
 
+@Component
 @AllArgsConstructor
-public class UsuarioRepositoryPort implements UsuarioPort {
+public class UsuarioRepositoryGateway implements UsuarioPort {
 
     private final UsuarioRepository usuarioRepository;
 

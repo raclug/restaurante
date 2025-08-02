@@ -1,14 +1,15 @@
 package br.com.fiap.restaurante.infrastructure.controllers.interfaces;
 
-import br.com.fiap.restaurante.dtos.AlteracaoUsuarioDTO;
-import br.com.fiap.restaurante.dtos.UsuarioDTO;
+import br.com.fiap.restaurante.infrastructure.dtos.AlteracaoUsuarioDTO;
+import br.com.fiap.restaurante.infrastructure.dtos.PaginaDTO;
+import br.com.fiap.restaurante.infrastructure.dtos.UsuarioDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -44,7 +45,7 @@ public interface IUsuarioController {
                     @ApiResponse(responseCode = "200", description = "Lista de usuários retornada com sucesso")
             }
     )
-    List<UsuarioDTO> listarUsuarios(final Pageable pageable);
+    List<UsuarioDTO> listarUsuarios(final PaginaDTO paginaDTO);
 
     @Operation(
             summary = "Consulta usuário por ID",
@@ -54,7 +55,6 @@ public interface IUsuarioController {
                     @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
             }
     )
-
     UsuarioDTO consultarUsuario(@PathVariable final Long id);
 
     @Operation(

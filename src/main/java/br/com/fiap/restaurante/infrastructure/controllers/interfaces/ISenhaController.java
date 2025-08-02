@@ -1,7 +1,8 @@
 package br.com.fiap.restaurante.infrastructure.controllers.interfaces;
 
 
-import br.com.fiap.restaurante.dtos.SenhaDTO;
+
+import br.com.fiap.restaurante.infrastructure.dtos.SenhaDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;

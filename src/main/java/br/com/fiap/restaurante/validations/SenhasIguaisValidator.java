@@ -1,6 +1,7 @@
 package br.com.fiap.restaurante.validations;
 
-import br.com.fiap.restaurante.dtos.SenhaDTO;
+
+import br.com.fiap.restaurante.infrastructure.dtos.SenhaDTO;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 

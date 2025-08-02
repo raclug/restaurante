@@ -1,6 +1,7 @@
 package br.com.fiap.restaurante.infrastructure.persistence.entities;
 
-import br.com.fiap.restaurante.enums.TipoUsuarioEnum;
+
+import br.com.fiap.restaurante.domain.entities.TipoUsuarioEnum;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UpdateTimestamp;

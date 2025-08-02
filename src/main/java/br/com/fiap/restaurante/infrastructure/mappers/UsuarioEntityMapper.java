@@ -1,13 +1,16 @@
 package br.com.fiap.restaurante.infrastructure.mappers;
 
 import br.com.fiap.restaurante.domain.entities.Usuario;
+import br.com.fiap.restaurante.infrastructure.persistence.entities.SenhaEntity;
 import br.com.fiap.restaurante.infrastructure.persistence.entities.UsuarioEntity;
 
 public class UsuarioEntityMapper {
 
+    private UsuarioEntityMapper() {}
+
     public static UsuarioEntity toEntity(final Usuario usuario) {
 
-        final var senhaEntity = SenhaEntityMapper.toEntity(usuario.senha());
+        final var senhaEntity = SenhaEntity.builder().senha(usuario.senha()).build();
 
         final var enderecoEntity = EnderecoEntityMapper.toEntity(usuario.endereco());
 
