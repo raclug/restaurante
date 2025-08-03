@@ -2,6 +2,7 @@ package br.com.fiap.restaurante.application.usercases.restaurante.impl;
 
 import br.com.fiap.restaurante.application.ports.RestaurantePort;
 import br.com.fiap.restaurante.application.ports.TipoUsuarioPort;
+import br.com.fiap.restaurante.application.ports.UsuarioPort;
 import br.com.fiap.restaurante.application.usercases.restaurante.AlterarRestaurante;
 import br.com.fiap.restaurante.domain.entities.Endereco;
 import br.com.fiap.restaurante.domain.entities.Restaurante;
@@ -14,7 +15,7 @@ public class AlterarRestauranteImpl implements AlterarRestaurante {
 
     private final RestaurantePort restaurantePort;
 
-    private final TipoUsuarioPort tipoUsuarioPort;
+    private final UsuarioPort usuarioPort;
 
     @Override
     public Restaurante execute(final Long id, final Restaurante restaurante) {
@@ -25,11 +26,11 @@ public class AlterarRestauranteImpl implements AlterarRestaurante {
             throw new RegistroNaoEncontradoException("Restaurante não encontrado.");
         }
 
-        var tipoUsuario = tipoUsuarioPort.consultarTipoUsuarioPorId(
-                        restaurante.getResponsavel().getTipoUsuario().getId())
-                .orElseThrow(() -> new RegistroNaoEncontradoException("Tipo de usuário não encontrado."));
+        var usuario = usuarioPort.consultarUsuarioPorId(
+                        restaurante.getIdResponsavel())
+                .orElseThrow(() -> new RegistroNaoEncontradoException("Usuário não encontrado."));
 
-        if (!"Dono de Restaurante".equals(tipoUsuario.getNome())) {
+        if (!"Dono de Restaurante".equals(usuario.getTipoUsuario().getNome())) {
             throw new TipoUsuarioException(
                     "Somente usuário do tipo 'Dono de Restaurante' pode ser responsável do restaurante.");
         }
@@ -66,7 +67,7 @@ public class AlterarRestauranteImpl implements AlterarRestaurante {
                 restaurante.getTipoCozinha(),
                 restaurante.getHorarioAbertura(),
                 restaurante.getHorarioFechamento(),
-                restaurante.getResponsavel()
+                restaurante.getIdResponsavel()
         );
     }
 }

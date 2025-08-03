@@ -4,6 +4,7 @@ package br.com.fiap.restaurante.infrastructure.handlers;
 import br.com.fiap.restaurante.domain.exceptions.LoginJaExistenteException;
 import br.com.fiap.restaurante.domain.exceptions.NaoAutorizadoException;
 import br.com.fiap.restaurante.domain.exceptions.RegistroNaoEncontradoException;
+import br.com.fiap.restaurante.domain.exceptions.TipoUsuarioException;
 import br.com.fiap.restaurante.infrastructure.dtos.MensagemErroDTO;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
@@ -27,8 +28,8 @@ public class RestControllerExceptionHandler {
     }
 
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    @ExceptionHandler(RegistroNaoEncontradoException.class)
-    public MensagemErroDTO handleNaoEncontradoException(RegistroNaoEncontradoException ex) {
+    @ExceptionHandler({RegistroNaoEncontradoException.class, TipoUsuarioException.class})
+    public MensagemErroDTO handleNaoEncontradoException(RuntimeException ex) {
         return MensagemErroDTO.builder()
                 .status(HttpStatus.NOT_FOUND.value())
                 .erros(List.of(ex.getMessage()))

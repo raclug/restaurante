@@ -17,7 +17,7 @@ public class RestauranteDTOMapper {
                 restauranteDTO.getTipoCozinha(),
                 restauranteDTO.getHorarioAbertura(),
                 restauranteDTO.getHorarioFechamento(),
-                Usuario.builder().id(restauranteDTO.getResponsavelId()).build());
+                restauranteDTO.getResponsavelId());
     }
 
     public static RestauranteDTO toDTO(final Restaurante restaurante) {
@@ -29,7 +29,7 @@ public class RestauranteDTOMapper {
                 .tipoCozinha(restaurante.getTipoCozinha())
                 .horarioAbertura(restaurante.getHorarioAbertura())
                 .horarioFechamento(restaurante.getHorarioFechamento())
-                .responsavel(UsuarioDTOMapper.toDTO(restaurante.getResponsavel()))
+                .responsavelId(restaurante.getIdResponsavel())
                 .build();
     }
 }

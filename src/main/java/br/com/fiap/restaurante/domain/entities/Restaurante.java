@@ -15,5 +15,5 @@ public class Restaurante {
     private String tipoCozinha;
     private String horarioAbertura;
     private String horarioFechamento;
-    private Usuario responsavel;
+    private Long idResponsavel;
 }

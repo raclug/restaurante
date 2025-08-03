@@ -3,8 +3,8 @@ package br.com.fiap.restaurante.infrastructure.controllers;
 
 import br.com.fiap.restaurante.infrastructure.controllers.interfaces.IRestauranteController;
 import br.com.fiap.restaurante.infrastructure.dtos.PaginaDTO;
-import br.com.fiap.restaurante.infrastructure.dtos.TipoUsuarioDTO;
-import br.com.fiap.restaurante.infrastructure.mappers.TipoUsuarioDTOMapper;
+import br.com.fiap.restaurante.infrastructure.dtos.RestauranteDTO;
+import br.com.fiap.restaurante.infrastructure.mappers.RestauranteDTOMapper;
 import br.com.fiap.restaurante.infrastructure.services.RestauranteService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -12,6 +12,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static br.com.fiap.restaurante.infrastructure.mappers.RestauranteDTOMapper.toDTO;
+import static br.com.fiap.restaurante.infrastructure.mappers.RestauranteDTOMapper.toDomain;
 
 
 @RestController
@@ -23,32 +26,32 @@ public class RestauranteController implements IRestauranteController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public TipoUsuarioDTO criarTipoUsuario(@RequestBody @Validated final TipoUsuarioDTO tipoUsuarioDTO) {
-        return toDTO(tipoUsuarioService.criarTipoUsuario(toDomain(tipoUsuarioDTO)));
+    public RestauranteDTO criarRestaurante(@RequestBody @Validated final RestauranteDTO restauranteDTO) {
+        return toDTO(restauranteService.criarRestaurante(toDomain(restauranteDTO)));
     }
 
     @PutMapping("/{id}")
-    public TipoUsuarioDTO alterarTipoUsuario(@RequestBody @Validated final TipoUsuarioDTO tipoUsuarioDTO,
+    public RestauranteDTO alterarRestaurante(@RequestBody @Validated final RestauranteDTO restauranteDTO,
                                              @PathVariable final Long id) {
 
-        return toDTO(tipoUsuarioService.alterarTipoUsuario(id, toDomain(tipoUsuarioDTO)));
+        return toDTO(restauranteService.alterarRestaurante(id, toDomain(restauranteDTO)));
     }
 
     @GetMapping
-    public List<TipoUsuarioDTO> listarTiposUsuario(final PaginaDTO paginaDTO) {
-        return tipoUsuarioService.listarTiposUsuario(paginaDTO.getPagina(), paginaDTO.getTamanhoPagina())
+    public List<RestauranteDTO> listarRestaurantes(final PaginaDTO paginaDTO) {
+        return restauranteService.listarRestaurantes(paginaDTO.getPagina(), paginaDTO.getTamanhoPagina())
                 .stream()
-                .map(TipoUsuarioDTOMapper::toDTO)
+                .map(RestauranteDTOMapper::toDTO)
                 .toList();
     }
 
     @GetMapping("/{id}")
-    public TipoUsuarioDTO consultarTipoUsuario(@PathVariable final Long id) {
-        return toDTO(tipoUsuarioService.consultarTipoUsuario(id));
+    public RestauranteDTO consultarRestaurante(@PathVariable final Long id) {
+        return toDTO(restauranteService.consultarRestaurante(id));
     }
 
     @DeleteMapping("/{id}")
-    public void removerTipoUsuario(@PathVariable final Long id) {
-        tipoUsuarioService.removerTipoUsuario(id);
+    public void removerRestaurante(@PathVariable final Long id) {
+        restauranteService.removerRestaurante(id);
     }
 }

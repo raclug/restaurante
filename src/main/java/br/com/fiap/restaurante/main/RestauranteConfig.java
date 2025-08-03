@@ -1,7 +1,7 @@
 package br.com.fiap.restaurante.main;
 
 import br.com.fiap.restaurante.application.ports.RestaurantePort;
-import br.com.fiap.restaurante.application.ports.TipoUsuarioPort;
+import br.com.fiap.restaurante.application.ports.UsuarioPort;
 import br.com.fiap.restaurante.application.usercases.restaurante.*;
 import br.com.fiap.restaurante.application.usercases.restaurante.impl.*;
 import org.springframework.context.annotation.Bean;
@@ -12,14 +12,14 @@ public class RestauranteConfig {
 
     @Bean
     public CriarRestaurante criarRestaurante(final RestaurantePort restaurantePort,
-                                             final TipoUsuarioPort tipoUsuarioPort) {
-        return new CriarRestauranteImpl(restaurantePort, tipoUsuarioPort);
+                                             final UsuarioPort usuarioPort) {
+        return new CriarRestauranteImpl(restaurantePort, usuarioPort);
     }
 
     @Bean
     public AlterarRestaurante alterarRestaurante(final RestaurantePort restaurantePort,
-                                                 final TipoUsuarioPort tipoUsuarioPort) {
-        return new AlterarRestauranteImpl(restaurantePort, tipoUsuarioPort);
+                                                 final UsuarioPort usuarioPort) {
+        return new AlterarRestauranteImpl(restaurantePort, usuarioPort);
     }
 
     @Bean

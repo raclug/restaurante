@@ -43,11 +43,7 @@ public class RestauranteDTO {
     @Schema(description = "Horário de fechamento do restaurante", example = "22:00")
     private String horarioFechamento;
 
-    @JsonProperty(access = WRITE_ONLY)
     @NotNull(message = "O responsável pelo restaurante é obrigatório.")
     @Schema(description = "Identificador do responsável pelo restaurante")
     private Long responsavelId;
-
-    @JsonProperty(access = READ_ONLY)
-    private UsuarioDTO responsavel;
 }

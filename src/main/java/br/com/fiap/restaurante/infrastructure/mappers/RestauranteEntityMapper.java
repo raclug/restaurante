@@ -2,6 +2,7 @@ package br.com.fiap.restaurante.infrastructure.mappers;
 
 import br.com.fiap.restaurante.domain.entities.Restaurante;
 import br.com.fiap.restaurante.infrastructure.persistence.entities.RestauranteEntity;
+import br.com.fiap.restaurante.infrastructure.persistence.entities.UsuarioEntity;
 
 public class RestauranteEntityMapper {
 
@@ -17,7 +18,7 @@ public class RestauranteEntityMapper {
                 restaurante.getTipoCozinha(),
                 restaurante.getHorarioAbertura(),
                 restaurante.getHorarioFechamento(),
-                UsuarioEntityMapper.toEntity(restaurante.getResponsavel())
+                UsuarioEntity.builder().id(restaurante.getIdResponsavel()).build()
         );
     }
 
@@ -30,7 +31,7 @@ public class RestauranteEntityMapper {
                 restauranteEntity.getTipoCozinha(),
                 restauranteEntity.getHorarioAbertura(),
                 restauranteEntity.getHorarioFechamento(),
-                UsuarioEntityMapper.toDomain(restauranteEntity.getResponsavel())
+                restauranteEntity.getResponsavel().getId()
         );
     }
 }
