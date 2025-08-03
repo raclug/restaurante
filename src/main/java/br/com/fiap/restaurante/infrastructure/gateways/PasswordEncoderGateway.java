@@ -19,6 +19,6 @@ public class PasswordEncoderGateway implements PasswordEncoderPort {
 
     @Override
     public boolean matches(CharSequence rawPassword, String encodedPassword) {
-        return !passwordEncoder.matches(rawPassword, encodedPassword);
+        return passwordEncoder.matches(rawPassword, encodedPassword);
     }
 }

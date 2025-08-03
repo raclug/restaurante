@@ -2,11 +2,13 @@ package br.com.fiap.restaurante.domain.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class Restaurante {
 
     private Long id;

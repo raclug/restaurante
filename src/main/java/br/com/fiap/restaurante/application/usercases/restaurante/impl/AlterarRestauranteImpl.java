@@ -1,7 +1,6 @@
 package br.com.fiap.restaurante.application.usercases.restaurante.impl;
 
 import br.com.fiap.restaurante.application.ports.RestaurantePort;
-import br.com.fiap.restaurante.application.ports.TipoUsuarioPort;
 import br.com.fiap.restaurante.application.ports.UsuarioPort;
 import br.com.fiap.restaurante.application.usercases.restaurante.AlterarRestaurante;
 import br.com.fiap.restaurante.domain.entities.Endereco;
