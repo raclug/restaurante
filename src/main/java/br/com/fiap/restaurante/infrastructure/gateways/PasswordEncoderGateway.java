@@ -4,7 +4,6 @@ import br.com.fiap.restaurante.application.ports.PasswordEncoderPort;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 @Component
 @AllArgsConstructor
