@@ -13,6 +13,8 @@ public class UsuarioDTOMapper {
 
         var endereco = EnderecoDTOMapper.toDomain(usuarioDTO.getEndereco());
 
+        var tipoUsuario = TipoUsuarioDTOMapper.toDomain(usuarioDTO.getTipoUsuario());
+
         var senha = new Senha(null, null, usuarioDTO.getSenha());
 
         return new Usuario(
@@ -21,7 +23,7 @@ public class UsuarioDTOMapper {
                 usuarioDTO.getEmail(),
                 usuarioDTO.getLogin(),
                 senha,
-                usuarioDTO.getTipoUsuario(),
+                tipoUsuario,
                 endereco
         );
     }
@@ -30,12 +32,14 @@ public class UsuarioDTOMapper {
 
         var enderecoDTO = EnderecoDTOMapper.toDTO(usuario.getEndereco());
 
+        var tipoUsuarioDTO = TipoUsuarioDTOMapper.toDTO(usuario.getTipoUsuario());
+
         return UsuarioDTO.builder()
                 .id(usuario.getId())
                 .nome(usuario.getNome())
                 .email(usuario.getEmail())
                 .login(usuario.getLogin())
-                .tipoUsuario(usuario.getTipoUsuario())
+                .tipoUsuario(tipoUsuarioDTO)
                 .endereco(enderecoDTO).build();
     }
 }

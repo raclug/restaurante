@@ -7,13 +7,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Usuario {
+public class TipoUsuario {
 
     private Long id;
+
     private String nome;
-    private String email;
-    private String login;
-    private Senha senha;
-    private TipoUsuario tipoUsuario;
-    private Endereco endereco;
 }

@@ -14,6 +14,8 @@ public class UsuarioEntityMapper {
 
         final var enderecoEntity = EnderecoEntityMapper.toEntity(usuario.getEndereco());
 
+        final var tipoUsuarioEntity = TipoUsuarioEntityMapper.toEntity(usuario.getTipoUsuario());
+
         return UsuarioEntity.builder()
                 .id(usuario.getId())
                 .nome(usuario.getNome())
@@ -21,13 +23,15 @@ public class UsuarioEntityMapper {
                 .login(usuario.getLogin())
                 .senha(senhaEntity)
                 .endereco(enderecoEntity)
-                .tipoUsuario(usuario.getTipoUsuario())
+                .tipoUsuario(tipoUsuarioEntity)
                 .build();
     }
 
     public static UsuarioEntity toEntityForUpdate(final UsuarioEntity usuarioAtual, final Usuario usuario) {
 
         final var enderecoEntity = EnderecoEntityMapper.toEntity(usuario.getEndereco());
+
+        final var tipoUsuarioEntity = TipoUsuarioEntityMapper.toEntity(usuario.getTipoUsuario());
 
         return UsuarioEntity.builder()
                 .id(usuarioAtual.getId())
@@ -36,7 +40,7 @@ public class UsuarioEntityMapper {
                 .login(usuarioAtual.getLogin())
                 .senha(usuarioAtual.getSenha())
                 .endereco(enderecoEntity)
-                .tipoUsuario(usuario.getTipoUsuario())
+                .tipoUsuario(tipoUsuarioEntity)
                 .build();
     }
 
@@ -48,13 +52,15 @@ public class UsuarioEntityMapper {
 
         final var endereco = EnderecoEntityMapper.toDomain(usuarioEntity.getEndereco());
 
+        final var tipoUsuario = TipoUsuarioEntityMapper.toDomain(usuarioEntity.getTipoUsuario());
+
         return new Usuario(
                 usuarioEntity.getId(),
                 usuarioEntity.getNome(),
                 usuarioEntity.getEmail(),
                 usuarioEntity.getLogin(),
                 senha,
-                usuarioEntity.getTipoUsuario(),
+                tipoUsuario,
                 endereco
         );
     }

@@ -12,13 +12,15 @@ public class AlteracaoUsuarioDTOMapper {
 
         var endereco = EnderecoDTOMapper.toDomain(usuarioDTO.getEndereco());
 
+        var tipoUsuario = TipoUsuarioDTOMapper.toDomain(usuarioDTO.getTipoUsuario());
+
         return new Usuario(
                 usuarioDTO.getId(),
                 usuarioDTO.getNome(),
                 usuarioDTO.getEmail(),
                 null,
                 null,
-                usuarioDTO.getTipoUsuario(),
+                tipoUsuario,
                 endereco
         );
     }

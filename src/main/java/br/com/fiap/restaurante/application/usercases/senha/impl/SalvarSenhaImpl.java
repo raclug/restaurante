@@ -5,7 +5,7 @@ import br.com.fiap.restaurante.application.ports.SenhaPort;
 import br.com.fiap.restaurante.application.usercases.senha.SalvarSenha;
 import br.com.fiap.restaurante.domain.entities.Senha;
 import br.com.fiap.restaurante.domain.exceptions.NaoAutorizadoException;
-import br.com.fiap.restaurante.domain.exceptions.UsuarioNaoEncontradoException;
+import br.com.fiap.restaurante.domain.exceptions.RegistroNaoEncontradoException;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -19,7 +19,7 @@ public class SalvarSenhaImpl implements SalvarSenha {
     public void execute(final Long usuarioId, final String senhaAtual, final String novaSenha) {
 
         var senhaCadastrada = senhaPort.consultarSenhaPorUsuarioId(usuarioId)
-                .orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado."));
+                .orElseThrow(() -> new RegistroNaoEncontradoException("Usuário não encontrado."));
 
         if (passwordEncoderPort.matches(senhaAtual, senhaCadastrada.getSenha())) {
             throw new NaoAutorizadoException("Senha atual inválida");

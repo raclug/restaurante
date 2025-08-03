@@ -4,7 +4,7 @@ import br.com.fiap.restaurante.application.ports.UsuarioPort;
 import br.com.fiap.restaurante.application.usercases.usuario.AlterarUsuario;
 import br.com.fiap.restaurante.domain.entities.Endereco;
 import br.com.fiap.restaurante.domain.entities.Usuario;
-import br.com.fiap.restaurante.domain.exceptions.UsuarioNaoEncontradoException;
+import br.com.fiap.restaurante.domain.exceptions.RegistroNaoEncontradoException;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -18,7 +18,7 @@ public class AlterarUsuarioImpl implements AlterarUsuario {
         var usuarioConsulta = usuarioPort.consultarUsuarioPorId(id);
 
         if (usuarioConsulta.isEmpty()) {
-            throw new UsuarioNaoEncontradoException("Usuário não encontrado.");
+            throw new RegistroNaoEncontradoException("Usuário não encontrado.");
         }
 
         var enderecoParaAlteracao = new Endereco(

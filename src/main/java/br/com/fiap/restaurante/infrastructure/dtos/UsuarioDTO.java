@@ -1,6 +1,5 @@
 package br.com.fiap.restaurante.infrastructure.dtos;
 
-import br.com.fiap.restaurante.domain.entities.TipoUsuarioEnum;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
@@ -47,7 +46,6 @@ public class UsuarioDTO {
     @Schema(description = "Endereço do usuário")
     private EnderecoDTO endereco;
 
-    @NotNull(message = "O tipo de usuário é obrigatório.")
-    @Schema(description = "Tipo do usuário", example = "CLIENTE")
-    private TipoUsuarioEnum tipoUsuario;
+    @Schema(description = "Tipo do usuário")
+    private TipoUsuarioDTO tipoUsuario;
 }

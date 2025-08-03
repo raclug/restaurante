@@ -1,7 +1,6 @@
 package br.com.fiap.restaurante.infrastructure.persistence.entities;
 
 
-import br.com.fiap.restaurante.domain.entities.TipoUsuarioEnum;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -38,6 +37,7 @@ public class UsuarioEntity {
     @OneToOne(cascade = CascadeType.ALL)
     private EnderecoEntity endereco;
 
-    @Enumerated(EnumType.STRING)
-    private TipoUsuarioEnum tipoUsuario;
+    @ManyToOne
+    @JoinColumn(name = "tipo_usuario_id")
+    private TipoUsuarioEntity tipoUsuario;
 }

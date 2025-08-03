@@ -3,7 +3,7 @@ package br.com.fiap.restaurante.application.usercases.usuario.impl;
 import br.com.fiap.restaurante.application.ports.UsuarioPort;
 import br.com.fiap.restaurante.application.usercases.usuario.ConsultarUsuario;
 import br.com.fiap.restaurante.domain.entities.Usuario;
-import br.com.fiap.restaurante.domain.exceptions.UsuarioNaoEncontradoException;
+import br.com.fiap.restaurante.domain.exceptions.RegistroNaoEncontradoException;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -16,7 +16,7 @@ public class ConsultarUsuarioImpl implements ConsultarUsuario {
         var usuarioConsulta = usuarioPort.consultarUsuarioPorId(id);
 
         if (usuarioConsulta.isEmpty()) {
-            throw new UsuarioNaoEncontradoException("Usuário não encontrado.");
+            throw new RegistroNaoEncontradoException("Usuário não encontrado.");
         }
 
         return usuarioConsulta.get();
