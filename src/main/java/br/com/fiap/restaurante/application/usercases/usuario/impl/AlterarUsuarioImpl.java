@@ -38,7 +38,7 @@ public class AlterarUsuarioImpl implements AlterarUsuario {
                 usuario.getEmail(),
                 usuarioConsulta.get().getLogin(),
                 usuarioConsulta.get().getSenha(),
-                usuario.getTipoUsuario(),
+                usuarioConsulta.get().getTipoUsuario(),
                 enderecoParaAlteracao);
 
         return usuarioPort.salvarUsuario(usuarioParaAlteracao);

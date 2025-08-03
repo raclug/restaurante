@@ -10,6 +10,10 @@ public class TipoUsuarioDTOMapper {
 
     public static TipoUsuario toDomain(final TipoUsuarioDTO tipoUsuarioDTO) {
 
+        if (tipoUsuarioDTO == null) {
+            return null;
+        }
+
         return new TipoUsuario(
                 tipoUsuarioDTO.getId(),
                 tipoUsuarioDTO.getNome()
@@ -17,6 +21,10 @@ public class TipoUsuarioDTOMapper {
     }
 
     public static TipoUsuarioDTO toDTO(final TipoUsuario tipoUsuario) {
+
+        if (tipoUsuario == null) {
+            return null;
+        }
 
         return TipoUsuarioDTO.builder()
                 .id(tipoUsuario.getId())

@@ -54,4 +54,9 @@ public class UsuarioRepositoryGateway implements UsuarioPort {
     public Optional<Usuario> consultarUsuarioPorLogin(String login) {
         return usuarioRepository.findFirstByLogin(login).map(UsuarioEntityMapper::toDomain);
     }
+
+    @Override
+    public void adicionarTipoUsuario(Long idUsuario, Long idTipoUsuario) {
+        usuarioRepository.addTipoUsuario(idUsuario, idTipoUsuario);
+    }
 }

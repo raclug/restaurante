@@ -1,6 +1,7 @@
 package br.com.fiap.restaurante.main;
 
 import br.com.fiap.restaurante.application.ports.PasswordEncoderPort;
+import br.com.fiap.restaurante.application.ports.TipoUsuarioPort;
 import br.com.fiap.restaurante.application.ports.UsuarioPort;
 import br.com.fiap.restaurante.application.usercases.usuario.*;
 import br.com.fiap.restaurante.application.usercases.usuario.impl.*;
@@ -33,5 +34,11 @@ public class UsuarioConfig {
     @Bean
     public RemoverUsuario removerUsuario(final UsuarioPort usuarioPort) {
         return new RemoverUsuarioImpl(usuarioPort);
+    }
+
+    @Bean
+    public AdicionarTipoUsuario adicionarTipoUsuario(final UsuarioPort usuarioPort,
+                                                     final TipoUsuarioPort tipoUsuarioPort) {
+        return new AdicionarTipoUsuarioImpl(usuarioPort, tipoUsuarioPort);
     }
 }

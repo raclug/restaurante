@@ -9,6 +9,10 @@ public class TipoUsuarioEntityMapper {
 
     public static TipoUsuarioEntity toEntity(final TipoUsuario tipoUsuario) {
 
+        if (tipoUsuario == null) {
+            return null;
+        }
+
         return TipoUsuarioEntity.builder()
             .id(tipoUsuario.getId())
             .nome(tipoUsuario.getNome())
@@ -16,6 +20,10 @@ public class TipoUsuarioEntityMapper {
     }
 
     public static TipoUsuario toDomain(final TipoUsuarioEntity tipoUsuarioEntity) {
+
+        if (tipoUsuarioEntity == null) {
+            return null;
+        }
 
         return new TipoUsuario(
             tipoUsuarioEntity.getId(),

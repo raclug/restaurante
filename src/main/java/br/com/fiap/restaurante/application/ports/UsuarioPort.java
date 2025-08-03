@@ -16,4 +16,6 @@ public interface UsuarioPort {
     Optional<Usuario> consultarUsuarioPorId(Long id);
 
     Optional<Usuario> consultarUsuarioPorLogin(String login);
+
+    void adicionarTipoUsuario(Long idUsuario, Long idTipoUsuario);
 }

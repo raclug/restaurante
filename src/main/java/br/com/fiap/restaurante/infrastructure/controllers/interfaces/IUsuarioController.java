@@ -66,4 +66,14 @@ public interface IUsuarioController {
             }
     )
     void removerUsuario(@PathVariable final Long id);
+
+    @Operation(
+            summary = "Adiciona tipo de usuário",
+            description = "Adiciona um tipo de usuário à um usuário existente. Caso o usuário já possua um tipo, ele será atualizado.",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Usuário atualizado com sucesso"),
+                    @ApiResponse(responseCode = "404", description = "Usuário não encontrado. Tipo de usuário não encontrado")
+            }
+    )
+    void adicionarTipoUsuario(@PathVariable final Long usuarioId, @PathVariable final Long tipoUsuarioId);
 }
