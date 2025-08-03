@@ -21,8 +21,33 @@ public class AlterarUsuarioImpl implements AlterarUsuario {
             throw new RegistroNaoEncontradoException("Usuário não encontrado.");
         }
 
-        var enderecoParaAlteracao = new Endereco(
-                usuarioConsulta.get().getEndereco().id(),
+        var enderecoParaAlteracao = getEndereco(usuario, usuarioConsulta.get());
+
+        var usuarioParaAlteracao = getUsuario(id, usuario, usuarioConsulta.get(), enderecoParaAlteracao);
+
+        return usuarioPort.salvarUsuario(usuarioParaAlteracao);
+    }
+
+    private static Usuario getUsuario(final Long id,
+                                      final Usuario usuario,
+                                      final Usuario usuarioConsulta,
+                                      final Endereco enderecoParaAlteracao) {
+
+        return new Usuario(
+                id,
+                usuario.getNome(),
+                usuario.getEmail(),
+                usuarioConsulta.getLogin(),
+                usuarioConsulta.getSenha(),
+                usuarioConsulta.getTipoUsuario(),
+                enderecoParaAlteracao);
+    }
+
+    private static Endereco getEndereco(final Usuario usuario,
+                                        final Usuario usuarioConsulta) {
+
+        return new Endereco(
+                usuarioConsulta.getEndereco().id(),
                 usuario.getEndereco().logradouro(),
                 usuario.getEndereco().numero(),
                 usuario.getEndereco().complemento(),
@@ -31,16 +56,5 @@ public class AlterarUsuarioImpl implements AlterarUsuario {
                 usuario.getEndereco().estado(),
                 usuario.getEndereco().cep()
         );
-
-        var usuarioParaAlteracao = new Usuario(
-                id,
-                usuario.getNome(),
-                usuario.getEmail(),
-                usuarioConsulta.get().getLogin(),
-                usuarioConsulta.get().getSenha(),
-                usuarioConsulta.get().getTipoUsuario(),
-                enderecoParaAlteracao);
-
-        return usuarioPort.salvarUsuario(usuarioParaAlteracao);
     }
 }
