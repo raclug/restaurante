@@ -7,6 +7,142 @@
 	},
 	"item": [
 		{
+			"name": "Tipo Usuário",
+			"item": [
+				{
+					"name": "Salvar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Teste\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/tipos-usuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"tipos-usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Teste Alteração\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/tipos-usuario/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"tipos-usuario",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/tipos-usuario?pagina=0&tamanhoPagina=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"tipos-usuario"
+							],
+							"query": [
+								{
+									"key": "pagina",
+									"value": "0"
+								},
+								{
+									"key": "tamanhoPagina",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Dados",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/tipos-usuario/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"tipos-usuario",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/tipos-usuario/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"tipos-usuario",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Usuários",
 			"item": [
 				{
@@ -16,7 +152,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\": \"usuario\",\n    \"tipo_usuario\": \"CLIENTE\",\n    \"email\": \"email@teste.com\",\n    \"login\": \"user_login\",\n    \"senha\": \"1234!@#$\",\n    \"endereco\": {\n        \"logradouro\": \"Av Paulista\",\n        \"numero\": \"1234\",\n        \"complemento\": \"complemento\",\n        \"bairro\": \"Jd Paulista\",\n        \"cidade\": \"São Paulo\",\n        \"estado\": \"SP\",\n        \"cep\": \"012345-222\"\n    }\n}",
+							"raw": "{\n    \"nome\": \"usuario\",\n    \"email\": \"email@teste.com\",\n    \"login\": \"user_login_comum\",\n    \"senha\": \"1234!@#$\",\n    \"endereco\": {\n        \"logradouro\": \"Av Paulista\",\n        \"numero\": \"1234\",\n        \"complemento\": \"complemento\",\n        \"bairro\": \"Jd Paulista\",\n        \"cidade\": \"São Paulo\",\n        \"estado\": \"SP\",\n        \"cep\": \"012345-222\"\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -39,6 +175,29 @@
 					"response": []
 				},
 				{
+					"name": "Adicionar Tipo Usuário",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/usuarios/2/tipos-usuario/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"usuarios",
+								"2",
+								"tipos-usuario",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Alterar",
 					"request": {
 						"method": "PUT",
@@ -53,7 +212,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/v1/usuarios/1",
+							"raw": "http://localhost:8080/v1/usuarios/252",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -62,7 +221,7 @@
 							"path": [
 								"v1",
 								"usuarios",
-								"1"
+								"252"
 							]
 						}
 					},
@@ -74,7 +233,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/v1/usuarios?page=0&size=5",
+							"raw": "http://localhost:8080/v1/usuarios?pagina=0&tamanhoPagina=5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -86,11 +245,11 @@
 							],
 							"query": [
 								{
-									"key": "page",
+									"key": "pagina",
 									"value": "0"
 								},
 								{
-									"key": "size",
+									"key": "tamanhoPagina",
 									"value": "5"
 								}
 							]
@@ -104,7 +263,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/v1/usuarios/1",
+							"raw": "http://localhost:8080/v1/usuarios/302",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -113,7 +272,7 @@
 							"path": [
 								"v1",
 								"usuarios",
-								"1"
+								"302"
 							]
 						}
 					},
@@ -164,7 +323,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/v1/usuarios/1/senhas",
+							"raw": "http://localhost:8080/v1/usuarios/252/senhas",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -173,7 +332,7 @@
 							"path": [
 								"v1",
 								"usuarios",
-								"1",
+								"252",
 								"senhas"
 							]
 						}
@@ -186,7 +345,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/v1/usuarios/1",
+							"raw": "http://localhost:8080/v1/usuarios/302",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -195,6 +354,278 @@
 							"path": [
 								"v1",
 								"usuarios",
+								"302"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Restaurante",
+			"item": [
+				{
+					"name": "Salvar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"McDowell's\",\n    \"endereco\": {\n        \"logradouro\": \"Av Franscisco Morato\",\n        \"numero\": \"5555\",\n        \"complemento\": \"complemento\",\n        \"bairro\": \"Jd Paulista\",\n        \"cidade\": \"São Paulo\",\n        \"estado\": \"SP\",\n        \"cep\": \"012345-222\"\n    },\n    \"tipo_cozinha\": \"fast-food\",\n    \"horario_abertura\": \"8:00\",\n    \"horario_fechamento\": \"22:00\",\n    \"responsavel_id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/restaurantes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"restaurantes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"McDowell'sAlt\",\n    \"endereco\": {\n        \"logradouro\": \"Av Franscisco Moratoalt\",\n        \"numero\": \"12345\",\n        \"complemento\": \"complementolt\",\n        \"bairro\": \"Jd Paulistalt\",\n        \"cidade\": \"São Paulolt\",\n        \"estado\": \"MG\",\n        \"cep\": \"012345-999\"\n    },\n    \"tipo_cozinha\": \"fast-foodalt\",\n    \"horario_abertura\": \"9:00\",\n    \"horario_fechamento\": \"23:00\",\n    \"responsavel_id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/restaurantes/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"restaurantes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/restaurantes?pagina=0&tamanhoPagina=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"restaurantes"
+							],
+							"query": [
+								{
+									"key": "pagina",
+									"value": "0"
+								},
+								{
+									"key": "tamanhoPagina",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/restaurantes/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"restaurantes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/restaurantes/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"restaurantes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Item Cardápio",
+			"item": [
+				{
+					"name": "Salvar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Hambúrguer Clássico\",\n    \"descricao\": \"Um delicioso hambúrguer com queijo, alface e tomate\",\n    \"preco\": 19.99,\n    \"disponivel_apenas_no_restaurante\": false,\n    \"foto\": \"https://example.com/foto.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/itens-cardapio",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"itens-cardapio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Hambúrguer ClássicoAlt\",\n    \"descricao\": \"Um delicioso hambúrguer com queijo, alface e tomatealt\",\n    \"preco\": 20.00,\n    \"disponivel_apenas_no_restaurante\": true,\n    \"foto\": \"https://example.com/foto.jpgalt\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/itens-cardapio/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"itens-cardapio",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/itens-cardapio?pagina=0&tamanhoPagina=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"itens-cardapio"
+							],
+							"query": [
+								{
+									"key": "pagina",
+									"value": "0"
+								},
+								{
+									"key": "tamanhoPagina",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/itens-cardapio/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"itens-cardapio",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/itens-cardapio/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"itens-cardapio",
 								"1"
 							]
 						}

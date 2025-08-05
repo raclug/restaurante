@@ -1,0 +1,79 @@
+package br.com.fiap.restaurante.infrastructure.controllers.interfaces;
+
+import br.com.fiap.restaurante.infrastructure.dtos.AlteracaoUsuarioDTO;
+import br.com.fiap.restaurante.infrastructure.dtos.PaginaDTO;
+import br.com.fiap.restaurante.infrastructure.dtos.UsuarioDTO;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.data.domain.Pageable;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
+
+@Tag(name = "Usuário", description = "Operações de gerenciamento de usuários")
+public interface IUsuarioController {
+
+    @Operation(
+            summary = "Cria um novo usuário",
+            description = "Cadastra um novo usuário no sistema.",
+            responses = {
+                    @ApiResponse(responseCode = "201", description = "Usuário criado com sucesso"),
+                    @ApiResponse(responseCode = "400", description = "Dados inválidos")
+            }
+    )
+    UsuarioDTO criarUsuario(@RequestBody @Validated final UsuarioDTO usuarioDTO);
+
+    @Operation(
+            summary = "Altera um usuário existente",
+            description = "Atualiza os dados do usuário identificado pelo ID.",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Usuário alterado com sucesso"),
+                    @ApiResponse(responseCode = "400", description = "Dados inválidos"),
+                    @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
+            }
+    )
+    UsuarioDTO alterarUsuario(@RequestBody @Validated final AlteracaoUsuarioDTO usuarioDTO,
+                                     @PathVariable final Long id);
+
+    @Operation(
+            summary = "Lista usuários",
+            description = "Retorna uma lista paginada de usuários.",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Lista de usuários retornada com sucesso")
+            }
+    )
+    List<UsuarioDTO> listarUsuarios(final PaginaDTO paginaDTO);
+
+    @Operation(
+            summary = "Consulta usuário por ID",
+            description = "Retorna os dados do usuário identificado pelo ID.",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Usuário encontrado"),
+                    @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
+            }
+    )
+    UsuarioDTO consultarUsuario(@PathVariable final Long id);
+
+    @Operation(
+            summary = "Remove usuário",
+            description = "Remove o usuário identificado pelo ID.",
+            responses = {
+                    @ApiResponse(responseCode = "204", description = "Usuário removido com sucesso"),
+                    @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
+            }
+    )
+    void removerUsuario(@PathVariable final Long id);
+
+    @Operation(
+            summary = "Adiciona tipo de usuário",
+            description = "Adiciona um tipo de usuário à um usuário existente. Caso o usuário já possua um tipo, ele será atualizado.",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Usuário atualizado com sucesso"),
+                    @ApiResponse(responseCode = "404", description = "Usuário não encontrado. Tipo de usuário não encontrado")
+            }
+    )
+    void adicionarTipoUsuario(@PathVariable final Long usuarioId, @PathVariable final Long tipoUsuarioId);
+}
